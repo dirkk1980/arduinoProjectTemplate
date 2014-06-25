@@ -45,56 +45,56 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 LSS += \
-Blinky.lss \
+arduinoProjectTemplate.lss \
 
 FLASH_IMAGE += \
-Blinky.hex \
+arduinoProjectTemplate.hex \
 
 EEPROM_IMAGE += \
-Blinky.eep \
+arduinoProjectTemplate.eep \
 
 SIZEDUMMY += \
 sizedummy \
 
 
 # All Target
-all: Blinky.elf secondary-outputs
+all: arduinoProjectTemplate.elf secondary-outputs
 
 # Tool invocations
-Blinky.elf: $(OBJS) $(USER_OBJS)
+arduinoProjectTemplate.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C++ Linker'
-	avr-gcc --cref -s -Os -o"Blinky.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm -Wl,-Map,Blinky.map,--cref -mrelax -Wl,--gc-sections -L"C:\development\workspace\arduino\eclipse\Blinky" -mmcu=atmega328p
+	avr-gcc --cref -s -Os -o"arduinoProjectTemplate.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm -Wl,-Map,arduinoProjectTemplate.map,--cref -mrelax -Wl,--gc-sections -L"C:\development\workspace\arduino\eclipse\arduinoProjectTemplate" -mmcu=atmega328p
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-Blinky.lss: Blinky.elf
+arduinoProjectTemplate.lss: arduinoProjectTemplate.elf
 	@echo 'Invoking: AVR Create Extended Listing'
-	-avr-objdump -h -S Blinky.elf  >"Blinky.lss"
+	-avr-objdump -h -S arduinoProjectTemplate.elf  >"arduinoProjectTemplate.lss"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Blinky.hex: Blinky.elf
+arduinoProjectTemplate.hex: arduinoProjectTemplate.elf
 	@echo 'Create Flash image (ihex format)'
-	-avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex Blinky.elf  "Blinky.hex"
+	-avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex arduinoProjectTemplate.elf  "arduinoProjectTemplate.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Blinky.eep: Blinky.elf
+arduinoProjectTemplate.eep: arduinoProjectTemplate.elf
 	@echo 'Create eeprom image (ihex format)'
-	-avr-objcopy -j .eeprom --no-change-warnings --change-section-lma .eeprom=0 -O ihex Blinky.elf  "Blinky.eep"
+	-avr-objcopy -j .eeprom --no-change-warnings --change-section-lma .eeprom=0 -O ihex arduinoProjectTemplate.elf  "arduinoProjectTemplate.eep"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-sizedummy: Blinky.elf
+sizedummy: arduinoProjectTemplate.elf
 	@echo 'Invoking: Print Size'
-	-avr-size --format=avr --mcu=atmega328p Blinky.elf
+	-avr-size --format=avr --mcu=atmega328p arduinoProjectTemplate.elf
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C_UPPER_DEPS)$(S_DEPS)$(LSS)$(C_DEPS)$(FLASH_IMAGE)$(CC_DEPS)$(ELFS)$(C++_DEPS)$(OBJS)$(CXX_DEPS)$(ASM_DEPS)$(EEPROM_IMAGE)$(SIZEDUMMY)$(S_UPPER_DEPS)$(CPP_DEPS) Blinky.elf
+	-$(RM) $(C_UPPER_DEPS)$(S_DEPS)$(LSS)$(C_DEPS)$(FLASH_IMAGE)$(CC_DEPS)$(ELFS)$(C++_DEPS)$(OBJS)$(CXX_DEPS)$(ASM_DEPS)$(EEPROM_IMAGE)$(SIZEDUMMY)$(S_UPPER_DEPS)$(CPP_DEPS) arduinoProjectTemplate.elf
 	-@echo ' '
 
 secondary-outputs: $(LSS) $(FLASH_IMAGE) $(EEPROM_IMAGE) $(SIZEDUMMY)
