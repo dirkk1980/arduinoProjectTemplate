@@ -64,7 +64,7 @@ all: arduinoProjectTemplate.elf secondary-outputs
 arduinoProjectTemplate.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C++ Linker'
-	avr-gcc --cref -s -Os -o"arduinoProjectTemplate.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm -Wl,-Map,arduinoProjectTemplate.map,--cref -mrelax -Wl,--gc-sections -L"C:\development\workspace\arduino\eclipse\arduinoProjectTemplate" -mmcu=atmega328p
+	avr-gcc --cref -s -Os -o"arduinoProjectTemplate.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm -Wl,-Map,arduinoProjectTemplate.map,--cref -mrelax -Wl,--gc-sections -L"C:\development\workspace\arduino\eclipse\arduinoProjectTemplate\libs" -mmcu=atmega328p
 	@echo 'Finished building target: $@'
 	@echo ' '
 
